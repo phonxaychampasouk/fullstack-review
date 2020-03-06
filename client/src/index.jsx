@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import axios from 'axios';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       repos: []
     }
 
@@ -15,7 +16,9 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+   axios.post('/repos', {username: term})
+   .then(()=> console.log('Username was sent'))
+   .catch(error=> {console.error(error);})
   }
 
   render () {
@@ -28,3 +31,12 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+/*
+This states repo is blank
+ I want Repo list to populate generated repos
+
+
+
+
+*/
